@@ -1,28 +1,15 @@
-pipeline{
-    agent any
-    stages{
-        stage('parallel-stages'){
-        parallel{
-            stage('p-s-1'){
-                steps{
-                    script{
-                        for (int i=1; i<=10; i++){
-                            echo "number $i"
-                        }
-                    }
-                }
+pipeline {
+    agent none
+    stages {
+        stage('Example') {
+            agent any
+            options {
+                // Timeout counter starts BEFORE agent is allocated
+                timeout(time: 1, unit: 'SECONDS')
             }
-            stage('p-s-2'){
-                steps{
-                    script{
-                        for (int i=1; i<=10; i++){
-                            echo "hello $i"
-                        }
-                    }
-                }
+            steps {
+                echo 'Hello World'
             }
-
         }
     }
-}
 }
